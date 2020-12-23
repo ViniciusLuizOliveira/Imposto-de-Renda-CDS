@@ -176,67 +176,67 @@
 
 
 		<script type="text/javascript">
-			var n, salariob, dpdt, dpdt2, inss, pinss, irpf, pirpf, salarioparcial, salariol;
+			var N, salariobruto, dependente, dependente2, INSS, PorcentagemINSS, IRPF, PorcentagemIRPF, SalarioParcial, salariolíquido;
 
 			function exec()
 			{
-				n = document.getElementById("nome").value;
-				salariob = document.getElementById("salario_b").value;
-				dpdt = document.getElementById("dependent").value;
+				N = document.getElementById("nome").value;
+				salariobruto = document.getElementById("salario_b").value;
+				dependente = document.getElementById("dependent").value;
 				
 
-				dpdt2 = dpdt * 189.59;
+				dependente2 = dependente * 189.59;
 
-				if (salariob < 1045.01) {
-					inss = salariob * 0.075;
-					pinss = "7,50%";
+				if (salariobruto < 1045.01) {
+					INSS = salariobruto * 0.075;
+					PorcentagemINSS = "7,50%";
 				}
-				if (salariob > 1045.00 && salariob < 2089.61) {
-					inss = ((salariob - 1045) * 0.09) + 78.38;
-					pinss = "9,00%";
+				if (salariobruto > 1045.00 && salariobruto < 2089.61) {
+					INSS = ((salariobruto - 1045) * 0.09) + 78.38;
+					PorcentagemINSS = "9,00%";
 				}
-				if (salariob > 2089.60 && salariob < 3134.41) {
-					inss = ((salariob - 2089.60) * 0.12) + 94.01 + 78.38;
-					pinss = "12,00%";
+				if (salariobruto > 2089.60 && salariobruto < 3134.41) {
+					INSS = ((salariobruto - 2089.60) * 0.12) + 94.01 + 78.38;
+					PorcentagemINSS = "12,00%";
 				}
-				if (salariob > 3134.40 && salariob < 6101.07) {
-					inss = ((salariob - 3134.40) * 0.14) + 125.38 + 94.01 + 78.38;
-					pinss = "14,00%";
+				if (salariobruto > 3134.40 && salariobruto < 6101.07) {
+					INSS = ((salariobruto - 3134.40) * 0.14) + 125.38 + 94.01 + 78.38;
+					PorcentagemINSS = "14,00%";
 				}
-				if (salariob > 6101.06) {
-					inss = 713.10;
-					pinss = "14,00%";
+				if (salariobruto > 6101.06) {
+					INSS = 713.10;
+					PorcentagemINSS = "14,00%";
 				}
 
-				salarioparcial = salariob - inss;
+				SalarioParcial = salariobruto - INSS;
 
-				if (salarioparcial < 1903.99) {
-					irpf = 0.00;
-					pirpf = "0,00%";
+				if (SalarioParcial < 1903.99) {
+					IRPF = 0.00;
+					PorcentagemIRPF = "0,00%";
 				}
-				if (salarioparcial > 1903.98 && salarioparcial < 2826.66) {
-					pirpf = "7,50%";
-					irpf = ((salariob - dpdt2 - inss) * 0.075) - 142.80;
+				if (SalarioParcial > 1903.98 && SalarioParcial < 2826.66) {
+					PorcentagemIRPF = "7,50%";
+					IRPF = ((salariobruto - dependente2 - INSS) * 0.075) - 142.80;
 				}
-				if (salarioparcial > 2826.65 && salarioparcial < 3751.06) {
-					pirpf = "15,00%";
-					irpf = ((salariob - dpdt2 - inss) * 0.15) - 354.80;
+				if (SalarioParcial > 2826.65 && SalarioParcial < 3751.06) {
+					PorcentagemIRPF = "15,00%";
+					IRPF = ((salariobruto - dependente2 - INSS) * 0.15) - 354.80;
 				}
-				if (salarioparcial > 3751.05 && salarioparcial < 4664.69) {
-					pirpf = "22,50%";
-					irpf = ((salariob - dpdt2 - inss) * 0.225) - 636.13;
+				if (SalarioParcial > 3751.05 && SalarioParcial < 4664.69) {
+					PorcentagemIRPF = "22,50%";
+					IRPF = ((salariobruto - dependente2 - INSS) * 0.225) - 636.13;
 				}
-				if (salarioparcial > 4664.68) {
-					pirpf = "27,50%";
-					irpf = ((salariob - dpdt2 - inss) * 0.275) - 869.26;
+				if (SalarioParcial > 4664.68) {
+					PorcentagemIRPF = "27,50%";
+					IRPF = ((salariobruto - dependente2 - INSS) * 0.275) - 869.26;
 				}
-				if (irpf < 0) {
-						irpf = 0.00;
+				if (IRPF < 0) {
+						IRPF = 0.00;
 					}
 
-				salariol = salarioparcial - irpf;
+				salariolíquido = SalarioParcial - IRPF;
 
-				let tabelapessoa = {nome_id:n, salario_bruto:salariob, porcentagem_inss:pinss, tbinss:inss, porcentagem_irpf:pirpf, tbirpf:irpf, salario_liquido:salariol};
+				let tabelapessoa = {nome_id:N, salario_bruto:salariobruto, porcentagem_inss:PorcentagemINSS, tbinss:INSS, porcentagem_irpf:PorcentagemIRPF, tbirpf:IRPF, salario_liquido:salariolíquido};
 
   				var tabela = document.getElementById("Tabela");
   				var row = tabela.insertRow(-1);
